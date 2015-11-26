@@ -131,7 +131,7 @@ public class Usuario {
 
 		try {
 			
-			if(usuario.getSenha() != null){
+			if(usuario.getSenha() != ""){
 				String sql = "UPDATE Usuario SET nomeUsuario = ?, senhaUsuario = ?, emailUsuario = ?, nascimentoUsuario = ? WHERE idUsuario = ?";
 		         PreparedStatement statement = (PreparedStatement) Banco_teste.con.prepareStatement(sql);
 		       
@@ -141,8 +141,8 @@ public class Usuario {
 		         statement.setString(4, usuario.getNascimentoUsuario());
 		         statement.setInt(5, usuario.getIdUsuario());
 		         
-		
-				statement.executeUpdate();
+		         statement.execute();
+		         statement.close();
 				
 			}else{
 				String sql = "UPDATE Usuario SET nomeUsuario = ?, emailUsuario = ?, nascimentoUsuario = ? WHERE idUsuario = ?";
@@ -154,7 +154,8 @@ public class Usuario {
 		         statement.setString(3, usuario.getNascimentoUsuario());
 		         statement.setInt(4, usuario.getIdUsuario());
 		
-				statement.executeUpdate();
+		         statement.execute();
+		         statement.close();
 			}
 
 		} catch (Exception e) {
@@ -191,6 +192,34 @@ public class Usuario {
 		}
 
 		if(emailUsuario == null){
+			System.out.println("true");
+			return true;
+		}else{
+			System.out.println("false");
+			return false;
+		}
+	}
+	public boolean searchEmail(String email){
+
+		try {
+			String query = "SELECT emailUsuario FROM Usuario where emailUsuario ='" + email + "'";
+
+			Statement st = Banco_teste.con.createStatement();
+
+			ResultSet rs = st.executeQuery(query);
+			
+			while (rs.next()) {
+				email = rs.getString("emailUsuario");
+			}
+
+			st.close();
+
+		} catch (Exception e) {
+			System.err.println("Houve uma excecao no Escambo associada ao banco de dados! ");
+			System.err.println(e.getMessage());
+		}
+
+		if(email == null){
 			System.out.println("true");
 			return true;
 		}else{

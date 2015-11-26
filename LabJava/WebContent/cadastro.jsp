@@ -1,14 +1,14 @@
 <!DOCTYPE html>
+<%@page import="controlador.Usuario"%>
+<%@page import="javax.swing.text.Document"%>
 <html lang="en">
 <head>
 <%
 	if (session.getAttribute("user") == null) {
 
-	}
-	else
-	{
+	} else {
 		response.sendRedirect("index.jsp");
-		
+
 	}
 %>
 <meta charset="utf-8">
@@ -31,74 +31,98 @@
 
 	</br>
 
-<div>
+	<div>
 
 
-<label>Cadastro de Usuário</label>
-<hr>
+		<label>Cadastro de Usuário</label>
+		<hr>
 
 
-</div>
-<div>
-	<form class="form-horizontal" action="cadastrar" method="post">
+	</div>
+	<div>
+		<form class="form-horizontal" action="cadastrar" method="post">
 
-		<div class="form-group form-group-sm">
-			<label class="col-sm-1"> Nome de Usuário:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name=usunomeusu
-					" placeholder="Nome de Usuário">
-			</div>
-		</div>
+			<div class="form-group form-group-sm">
+				<label class="col-sm-1"> Nome de Usuário:</label>
+				<div class="col-sm-2">
+					<input type="text" id="nomeusu" class="form-control"
+						name="usunomeusu" placeholder="Nome de Usuário">
 
-
-		<div class="form-group form-group-sm">
-			<label class="col-sm-1"> Nome Completo:</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control" name=usunomecomp
-					" placeholder="Nome Completo">
-			</div>
-		</div>
-
-
-
-		<div class="form-group form-group-sm">
-			<label class="col-sm-1">Endereço de email:</label>
-			<div class="col-sm-2">
-				<input type="email" class="form-control" name="usuemail"
-					placeholder="Email">
-			</div>
-		</div>
-
-
-
-		<div class="form-group form-group-sm">
-			<label class="col-sm-1">Senha:</label>
-			<div class="col-sm-2">
-				<input type="password" class="form-control" name="usupwd"
-					placeholder="Password">
-			</div>
-		</div>
-
-
-
-		<div class="form-group form-group-sm">
-			<label class="col-sm-1"> Data de Nascimento:</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control" name="usunascimento">
+					<script>		
+function tamanho()
+{
+				Usuario usuario = new Usuario();
+				var dota = document.getElementById("nomeusu").value;
+				if(dota.length<5)
+				{
+					alert("Tamanho insuficiente");
+				}
+				else if(!usuario.searchEmail(document.getElementByName("usuemail").value))
+				{
+					
+					alert("Email já cadastrado. Digite outro email")
+				}
+				else
+				{
+					var x = document.getElementById("mybtn").type = "submit";
+					alert("Cadastrado");				
+				}
+}
+</script>
+				</div>
 			</div>
 
-		</div>
-		<div>
-			<button type="submit" class="btn btn-success">Cadastrar</button>
-			<button type="reset" class="btn btn-warning">Limpar</button>
-			<button type= "button" class="btn btn-danger" onClick="history.go(-1);return true">Voltar</button>
+
+			<div class="form-group form-group-sm">
+				<label class="col-sm-1"> Nome Completo:</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" name=usunomecomp
+						" placeholder="Nome Completo">
+				</div>
+			</div>
 
 
-		</div>
+
+			<div class="form-group form-group-sm">
+				<label class="col-sm-1">Endereço de email:</label>
+				
+				<div class="col-sm-2">
+					<input type="email" class="form-control" name="usuemail"
+						placeholder="Email">
+				</div>
+			</div>
 
 
-	</form>
-</div>
+
+			<div class="form-group form-group-sm">
+				<label class="col-sm-1">Senha:</label>
+				<div class="col-sm-2">
+					<input type="password" class="form-control" name="usupwd"
+						placeholder="Password">
+				</div>
+			</div>
+
+
+
+			<div class="form-group form-group-sm">
+				<label class="col-sm-1"> Data de Nascimento:</label>
+				<div class="col-sm-2">
+					<input type="date" class="form-control" name="usunascimento">
+				</div>
+			</div>
+			<div>
+				<button type="button" class="btn btn-success" id="mybtn"
+					onClick="tamanho()">Cadastrar</button>
+				<button type="reset" class="btn btn-warning">Limpar</button>
+				<button type="button" class="btn btn-danger"
+					onClick="history.go(-1);return true">Voltar</button>
+
+
+			</div>
+
+
+		</form>
+	</div>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

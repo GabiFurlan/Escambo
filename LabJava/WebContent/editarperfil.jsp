@@ -131,20 +131,20 @@
 								<span class="col-md-1 col-md-offset-2 text-center"><i
 									class="fa fa-user bigicon"></i></span>
 								<div class="col-md-8">
-									<form action="">
-										<label>Digite seu nome novo:</label> <input id="fname"
-											name="novoNome" type="text"
+									
+										<label>Digite seu nome novo:</label> <input required id="fname"
+											name="novoNome" type="text" placeholder="Digite seu nome completo"
 											value="<%out.println(abc.getNomeCom());%>"
 											class="form-control">
-									</form>
+									
 								</div>
 							</div>
 							<div class="form-group">
 								<span class="col-md-1 col-md-offset-2 text-center"><i
 									class="fa fa-user bigicon"></i></span>
 								<div class="col-md-8">
-									<label>Digite seu email novo:</label> <input id="fname"
-										type="text" class="form-control" name="novoEmail" placeholder="<%out.println(abc.getEmail()); %>"
+									<label>Digite seu email novo:</label> <input required id="fname"
+										type="email" class="form-control" name="novoEmail" placeholder="Digite seu novo email"
 										value="<%out.println(abc.getEmail()); %>">
 								</div>
 							</div>
@@ -153,8 +153,8 @@
 								<span class="col-md-1 col-md-offset-2 text-center"><i
 									class="fa fa-user bigicon"></i></span>
 								<div class="col-md-8">
-									<label>Data de nascimento:</label> <input id="fname"
-										name="novoNascimento" type="text" placeholder="dd/mm/aaaa"
+									<label>Data de nascimento:</label> <input required id="fname"
+										name="novoNascimento" type="date" placeholder="dd/mm/aaaa"
 										value="<%out.println(abc.getNascimentoUsuario()); %>"
 										class="form-control">
 
@@ -167,7 +167,7 @@
 								<span class="col-md-1 col-md-offset-2 text-center"><i
 									class="fa fa-user bigicon"></i></span>
 								<div class="col-md-8">
-									<label>Senha:</label> <input id="fname" name="novaSenha"
+									<label>Senha:</label> <input id="fname" name="novaSenha" value=""
 										type="password" placeholder="Digite sua nova senha" class="form-control">
 
 								</div>

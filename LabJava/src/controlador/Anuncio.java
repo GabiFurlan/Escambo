@@ -5,8 +5,13 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.Part;
+
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import BancoDados.Banco_teste;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -206,7 +211,7 @@ public class Anuncio {
 	 
 	 public byte[] recuperaImagem(int idAnun)throws Exception{
 		    meuBD.conexao();
-	        PreparedStatement ps = (PreparedStatement) meuBD.con.prepareStatement("SELECT * FROM Anuncio WHERE idAnuncio = " + idAnun);
+	        PreparedStatement ps = (PreparedStatement) Banco_teste.con.prepareStatement("SELECT * FROM Anuncio WHERE idAnuncio = " + idAnun);
 	        try {  
 	            ResultSet resultado = ps.executeQuery();
 	            if (resultado.next()) {
@@ -220,5 +225,51 @@ public class Anuncio {
 	        meuBD.desconecta();
 	        return null;
 	    }
+	 public ArrayList<Anuncio> listaAnuncios(String tags){
+		   String[] tagsDividadas = tags.split(",");
+		   
+		   //COLEÇÃO PARA NÃO TER ANUNCIOS DUPLICADOS
+		   Set<Anuncio> anuncios = new HashSet<Anuncio>();
+		   
+		   ResultSet rs = null;
+		   meuBD.conexao();
+		   for (String tag : tagsDividadas) {
+			   tag = tag.replace("'","");
+		    
+		    try{
+		    
+		     PreparedStatement sql = (PreparedStatement)Banco_teste.con.prepareStatement("SELECT * FROM Anuncio WHERE tagAnuncio like '%" + tag + "%'" );
+		     rs = sql.executeQuery();
+		     
+		     while(rs.next())
+		     {
+		      Anuncio a = new Anuncio();
+		      a.setTituloAnuncio(rs.getString("tituloAnuncio"));
+		      a.setDescricaoAnuncio(rs.getString("descricaoAnuncio"));
+		      a.setTagAnuncio(rs.getString("tagAnuncio"));
+		      a.setIdAnuncio(rs.getInt("idAnuncio"));
+		      a.setTempoAnuncio(rs.getInt("tempoAnuncio"));
+		      a.setDataAnuncio(rs.getString("dataCadastroAnuncio"));
+		      a.setIdGrupo(rs.getInt("idGrupo"));
+		      
+		      anuncios.add(a);
+		      
+		     }
+		    }
+		    catch(Exception e)
+		    {
+		     System.out.println("Erro ao listar anuncios no buscar" + System.lineSeparator() + e.getMessage());
+		    }
+		    
+		   }
+		   
+		   meuBD.desconecta();
+		   //converte para arrayList e retorna
+		   System.out.println(anuncios.toString());
+		   for (Anuncio anuncio : anuncios) {
+			System.out.println(anuncio.getTituloAnuncio());
+		}
+		   return new ArrayList<Anuncio>(anuncios);  
+		  }
 
 }

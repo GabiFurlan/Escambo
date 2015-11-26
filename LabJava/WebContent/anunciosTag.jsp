@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<%@ page import="BancoDados.Banco_teste"%>
+<%@ page import="controlador.*"%>
+<%@ page import="java.util.ArrayList" %>
 <%
 	if (session.getAttribute("user") != null) {
 
-	}
-	else
-	{
-		response.sendRedirect("index.jsp");
-		
+		response.sendRedirect("logado.jsp");
 	}
 %>
-<%@ page import="java.sql.*"%>
-<%@ page import="java.io.*"%>
-<%@page import="java.util.logging.Logger"%>
-<%@page import="java.util.logging.Level"%>
-<%@ page import="controlador.*"%>
-<%@ page import="BancoDados.Banco_teste"%>
-<%@ page import="java.util.ArrayList" %>
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -26,28 +19,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<!--   <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 50%;
-      max-height: 50px !important;
-      margin: auto;
-  }
-  </style> -->
-
- <style>
- .carousel-inner > .item > img,
- .carousel-inner > .item > a > img {
-     display: block;
-   /*    max-width: 100%; 
-      max-height: 100%;  */
-     height: 200px !important;
-      width: 300px !important; 
- }
- </style>
-
-
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,9 +39,7 @@
 <body>
 
 
-
-
-		<!BARRA DE MENU>
+	<!BARRA DE MENU>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -89,12 +58,11 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-
-					<li><a href="index.jsp">Início</a></li>
-					<li class="active"><a href="profile.jsp">Perfil <span
+					<li class="active"><a href="index.jsp">Início <span
 							class="sr-only">(current)</span></a></li>
 					<li><a href="sobre.jsp">Sobre</a></li>
 					<li><a href="contato.jsp">Contato</a></li>
+
 
 				</ul>
 				<form class="navbar-form navbar-left" role="search">
@@ -105,17 +73,23 @@
 					<button type="submit" class="btn btn-default">Procurar</button>
 				</form>
 
-
-				<form class="navbar-form navbar-right" action="logout" method="post">
-					<label> <a href="profile.jsp"> <%
- 	Usuario abc = (Usuario) session.getAttribute("user");
- 	out.println(abc.getLogin());
- %>
-					</a>
-					</label>
-					<button type="submit" class="btn btn-default">Logout</button>
+				<form class="navbar-form navbar-right" action="checkemail"
+					method="post">
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputEmail3">Email</label> <input
+							type="text" class="form-control" name="indexemail"
+							placeholder="Email - Usuário">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputPassword3">Password</label>
+						<input type="password" class="form-control" name="indexsenha"
+							placeholder="Password">
+					</div>
+					<button type="submit" class="btn btn-default">Entrar</button>
+					<label> <a href="cadastro.jsp">Cadastrar</a></label>
 
 				</form>
+
 
 			</div>
 			<!-- /.navbar-collapse -->
@@ -125,14 +99,14 @@
 	</nav>
 	<!FIM DA BARRA DE MENU>
 
-<% 	Usuario user = (Usuario) session.getAttribute("user"); 
-	int userID = user.getIdUsuario();
+<% 	
+	String tags=request.getParameter("tag");  
+	out.println(tags);
 	Anuncio esteAnuncio = new Anuncio();
 	Banco_teste meuBD = new Banco_teste();
-	ArrayList<Anuncio> listaDeAnuncios = esteAnuncio.listaAnuncios(userID);
+	ArrayList<Anuncio> listaDeAnuncios = esteAnuncio.listaAnuncios(tags);
 	String url = null;
 	int n = listaDeAnuncios.size();
-	out.println(n);
 	
 		%>
 	<div class="container well">
@@ -148,13 +122,70 @@
 			out.println("<div class='caption'>");
 			out.println("<h3>" + listaDeAnuncios.get(i).getTituloAnuncio() + "</h3>");
 			out.println("<p>" + listaDeAnuncios.get(i).getDescricaoAnuncio()+ "</p>");
-			%>
-			<a href="CadAnun?anun_Id=<%=anun_Id%>&ac=apagar" class="btn btn-primary" > DELETE</a>  <%
-			//out.println("<a href='#' class='btn btn-primary' role='button'> DELETE </a>");
 			out.println("</div>");
 			out.println("</div>");
 			}%>	
 </div>
+
+
+	<script type="text/javascript">
+		var limeira = 25;
+	</script>
+
+	<div class="container well">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4">
+				<span class="text-right"> </span>
+				<h3>Sobre Nós</h3>
+				<hr>
+				<p>A Escambo-FT LTDA é um site que faz a intermediação entre
+					pessoas que procuram vender ou trocar seus bens.</p>
+				<p>A ideia é que após visto o anúncio no site, os interessados
+					entrem em contato com o anúnciante.</p>
+				<p>Obs: Nós não nos responsabilizamos por qualquer negociação
+					feita apartir daqui.</p>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4 hidden-sm hidden-xs">
+				<span class="text-right"> </span>
+				<h3>Últimas Notícias</h3>
+				<hr>
+				<div class="media-object-default">
+					<div class="media">
+						<div class="media-body">
+							<h4 class="media-heading">Site Atualizado</h4>
+							Removemos alguns defeitos com a barra superior,
+							<p>Também foi introduzido novos links.</p>
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-body">
+							<h4 class="media-heading">Site Fora do Ar</h4>
+							Estivesmo fora do ar por alguns momentos essa semana devido a
+							falhas com o servidor local.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4">
+				<span class="text-right"> </span>
+				<h3>Fale Conosco</h3>
+				<hr>
+
+				<address>
+					<strong>Escambo LTDA</strong><br> Pascoal Marmo 1888,<br>
+					Limeira, SP, CEP: 13484-332 <br> <abbr title="Phone">Tel:</abbr>
+					(19) 9456-7890
+				</address>
+
+				<address>
+					<strong>Henrique Bicudo</strong><br> <a href="mailto:#">escambo@example.com</a>
+				</address>
+			</div>
+		</div>
+	</div>
+
+
+
 
 
 

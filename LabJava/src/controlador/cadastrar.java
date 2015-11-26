@@ -73,13 +73,14 @@ public class cadastrar extends HttpServlet {
 				usuarioEditar.setNomeCom(request.getParameter("novoNome"));
 				usuarioEditar.setEmail(request.getParameter("novoEmail"));
 				usuarioEditar.setSenha(request.getParameter("novaSenha"));
+				System.out.println((request.getParameter("novaSenha")));
 				usuarioEditar.setNascimentoUsuario(request.getParameter("novoNascimento"));
 				if (usuarioNovo.update(usuarioEditar)){
 					System.out.println("Cadastro atualizado com sucesso!");
-					response.sendRedirect("profile.jsp");
+					//response.sendRedirect("profile.jsp");
 				}else{
 					System.out.println("Erro ao atualizar o cadastro!");
-					response.sendRedirect("editarperfil.jsp");
+					//response.sendRedirect("editarperfil.jsp");
 				}
 			}
 		}
