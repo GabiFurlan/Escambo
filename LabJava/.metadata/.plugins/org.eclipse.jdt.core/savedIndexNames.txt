@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+C:\Users\vinicius\Desktop\Laboratorio-de-Java-master\Bicudo\.metadata\.plugins\org.eclipse.jdt.core
+1025725869.index
