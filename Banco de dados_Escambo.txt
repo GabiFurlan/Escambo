@@ -1,0 +1,55 @@
+DROP DATABASE IF EXISTS Escambo;
+create database Escambo;
+use Escambo;
+
+DELIMITER $$
+
+CREATE TRIGGER excluiAnuncios BEFORE DELETE ON Usuario
+FOR EACH ROW
+  BEGIN
+    DELETE FROM Anuncio	WHERE Anuncio.idUsuario = OLD.idUsuario; 
+END $$
+
+DELIMITER ;
+
+create table Usuario
+(
+	idUsuario int not null auto_increment primary key,
+	nomeUsuario varchar(50) not null,
+    loginUsuario varchar(20) not null,
+    nivelAcesso boolean not null default 0,
+	senhaUsuario varchar(12)  null,
+    emailUsuario varchar(40)  null,
+    nascimentoUsuario varchar (20)  null,
+    dataCadastroUsuario date null
+);
+
+create table Grupo
+(
+	idGrupo int not null auto_increment primary key,
+    nomeGrupo varchar(30),
+    descricaoGrupo varchar(140)
+
+);
+create table Anuncio
+(
+	idAnuncio int auto_increment primary key,
+	tituloAnuncio varchar(20) not null,
+    descricaoAnuncio varchar(140) not null,
+    tagAnuncio varchar (100) null,
+	tempoAnuncio int null,
+    idUsuario int not null,
+     
+    fotoAnuncio longblob not null,
+    idGrupo int null,
+    
+	constraint fkidUsuario foreign key (idUsuario)
+    references Usuario (idUsuario),
+    
+    constraint fkidGrupo foreign key (idGrupo)
+    references Grupo (idGrupo)
+
+);
+
+INSERT INTO Usuario (nomeUsuario, loginUsuario, nivelAcesso, senhaUsuario, emailUsuario, nascimentoUsuario) values ('Vinicius Souza', 'Vinicius', 1, 12345, 'vini@gmail.com', '12-12-2012');
+
