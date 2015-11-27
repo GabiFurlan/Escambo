@@ -142,7 +142,7 @@
 			out.println("<div class='thumbnail'>");
 			esteAnuncio = listaDeAnuncios.get(i);
 			int anun_Id  = esteAnuncio.getIdAnuncio();
-			%><img src="CadAnun?anun_Id=<%=anun_Id%>&ac=mostrarFoto" width="118" height="106"/> <%
+			%><img src="CadAnun?anun_Id=<%=anun_Id%>&ac=mostrarFoto" width="200" height="190"/> <%
 			out.println("</div>");
 			out.println("<div class='caption'>");
 			out.println("<h3>" + listaDeAnuncios.get(i).getTituloAnuncio() + "</h3>");

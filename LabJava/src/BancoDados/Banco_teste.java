@@ -50,7 +50,7 @@ public class Banco_teste {
 		int idUsuario = 0;
 		String loginUsuario = null;
 		String nomeCompleto = null;
-		int nivelAcesso = 0;
+		Boolean nivelAcesso = false;
 		String emailUsuario = null;
 		try {
 			// MUDAR O NOME PARA O NOME Q ESTA NA TABELA
@@ -66,7 +66,7 @@ public class Banco_teste {
 				System.out.println(idUsuario);
 				loginUsuario = rs.getString("loginUsuario");
 				nomeCompleto = rs.getString("nomeUsuario");
-				nivelAcesso = rs.getInt("nivelAcesso");
+				nivelAcesso = rs.getBoolean("nivelAcesso");
 				emailUsuario = rs.getString("emailUsuario");
 				System.out.println(emailUsuario);
 				meuUsuario.setIdUsuario(idUsuario);
@@ -75,6 +75,7 @@ public class Banco_teste {
 				//	meuUsuario.setNascimentoUsuario(nascimentoUsuario);
 				meuUsuario.setLogin(loginUsuario);
 				meuUsuario.setNomeCom(nomeCompleto);
+				meuUsuario.setNivelAces(nivelAcesso);
 				// print the results
 			}
 			st.close();

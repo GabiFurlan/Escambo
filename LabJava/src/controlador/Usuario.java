@@ -82,11 +82,11 @@ public class Usuario {
 	public Usuario() {
 	}
 	
-	public void apagarUsuario(int idAnuncio) throws SQLException{
+	public void apagarUsuario(String login) throws SQLException{
 		meuBD.conexao();
-		 String sql = "DELETE FROM Usuario WHERE idUsuario = ?";
+		 String sql = "DELETE FROM Usuario WHERE loginUsuario = ?";
 		 PreparedStatement statement = (PreparedStatement) Banco_teste.con.prepareStatement(sql);
-         statement.setInt(1, idUsuario);  
+         statement.setString(1, login);  
          statement.executeUpdate();
          meuBD.desconecta();
 	}
@@ -303,7 +303,7 @@ public class Usuario {
 		int idUsuario = 0;
 		String loginUsuario = null;
 		String nomeCompleto = null;
-		int nivelAcesso = 0;
+		Boolean nivelAcesso = false;
 		String emailUsuario = null;
 		String nascimentoUsuario = null;
 		
@@ -324,7 +324,7 @@ public class Usuario {
 				System.out.println(idUsuario);
 				loginUsuario = rs.getString("loginUsuario");
 				nomeCompleto = rs.getString("nomeUsuario");
-				nivelAcesso = rs.getInt("nivelAcesso");
+				nivelAcesso = rs.getBoolean("nivelAcesso");
 				emailUsuario = rs.getString("emailUsuario");
 				nascimentoUsuario = rs.getString("nascimentoUsuario");
 				System.out.println(emailUsuario);
@@ -333,7 +333,7 @@ public class Usuario {
 				meuUsuario.setNascimentoUsuario(nascimentoUsuario);
 				meuUsuario.setLogin(loginUsuario);
 				meuUsuario.setNomeCom(nomeCompleto);
-				
+				meuUsuario.setNivelAces(nivelAcesso);
 
 			}
 			st.close();

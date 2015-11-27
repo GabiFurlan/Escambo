@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +44,7 @@ public class cadastrar extends HttpServlet {
 
 				if (usuarioNovo.inserir(usuarioNovo) == false) {
 
-					request.getRequestDispatcher("cadastro.jsp").forward(
+					request.getRequestDispatcher("jaexiste.jsp").forward(
 							request, response);
 
 					System.out.println("usuario ja existe");
@@ -69,7 +70,7 @@ public class cadastrar extends HttpServlet {
 		if (usuarioEditar != null) {
 			if(!usuarioNovo.searchEmailUsuarioCadastrado(usuarioNovo)){
 				System.out.println("Email já existe no cadastro");
-				RequestDispatcher rs = request.getRequestDispatcher("editarperfil.jsp");
+				RequestDispatcher rs = request.getRequestDispatcher("jaexiste.jsp");
 	            rs.include(request, response);
 			}else{
 				usuarioEditar.setNomeCom(request.getParameter("novoNome"));
@@ -87,6 +88,18 @@ public class cadastrar extends HttpServlet {
 		            rs.include(request, response);
 				}
 			}
+		}
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String login = request.getParameter("nomeusu");
+		Usuario usuarioApagar = new Usuario();
+		try {
+			usuarioApagar.apagarUsuario(login);
+			RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("nao excluiu");
+			e.printStackTrace();
 		}
 	}
 }

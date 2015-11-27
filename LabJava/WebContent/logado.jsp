@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <%-- <%@page import="com.sun.xml.internal.bind.v2.schemagen.xmlschema.Import"%> --%>
 <html lang="en">
+<%@ page import="BancoDados.Banco_teste"%>
 <%@ page import="controlador.*"%>
+<%@ page import="java.util.ArrayList" %>
+
 <head>
 
 
@@ -64,10 +67,10 @@
 				</ul>
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control"
-							placeholder="Ex: Celular, Tablet ...">
+						<input type="text" class="form-control" 
+							placeholder="Ex: Celular, Tablet ..." id="procurarAnun">
 					</div>
-					<button type="submit" class="btn btn-default">Procurar</button>
+				<button type="button" class="btn btn-primary" id="procurar" >Procurar</button>
 				</form>
 
 
@@ -88,8 +91,33 @@
 
 	</nav>
 	<!FIM DA BARRA DE MENU>
+	
+	<% 	
+	Anuncio esteAnuncio = new Anuncio();
+	Banco_teste meuBD = new Banco_teste();
+	ArrayList<Anuncio> listaDeAnuncios = esteAnuncio.listaAnuncios();
+	String url = null;
+	int n = listaDeAnuncios.size();
+	
+		%>
+	<div class="container well">
+	<% 
+		for(int i=0;i<n;i++){
+			out.println("<div class='col-sm-6 col-md-3'>");
+			out.println("<div class='thumbnail'>");
+			esteAnuncio = listaDeAnuncios.get(i);
+			int anun_Id  = esteAnuncio.getIdAnuncio();
+			%><img src="CadAnun?anun_Id=<%=anun_Id%>&ac=mostrarFoto" width="200" height="190"/> <%
+			out.println("</div>");
+			out.println("<div class='caption'>");
+			out.println("<h3>" + listaDeAnuncios.get(i).getTituloAnuncio() + "</h3>");
+			out.println("<p>" + listaDeAnuncios.get(i).getDescricaoAnuncio()+ "</p>");
+			out.println("</div>");
+			out.println("</div>");
+			}%>	
+</div>
 
-
+<!-- 
 
 	<section>
 		<div class="jumbotron text-center">
@@ -259,17 +287,25 @@
 			</div>
 		</div>
 	</div>
-
+ -->
 
 
 
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+$( "#procurar" ).click(function() {
+	
+	var tags = $( "#procurarAnun" ).val();
+	
+	window.location="anunciosTag.jsp?tag='"+ tags + "'";
+});
+</script>
+
 </body>
 </html>
 

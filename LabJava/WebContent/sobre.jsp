@@ -57,11 +57,10 @@
 				</ul>
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control"
-							placeholder="Ex: Celular, Tablet ...">
-							
+						<input type="text" class="form-control" 
+							placeholder="Ex: Celular, Tablet ..." id="procurarAnun">
 					</div>
-					<button type="submit" class="btn btn-default">Procurar</button>
+				<button type="button" class="btn btn-primary" id="procurar" >Procurar</button>
 				</form>
 			
 <%
@@ -227,6 +226,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+$( "#procurar" ).click(function() {
+	
+	var tags = $( "#procurarAnun" ).val();
+	
+	window.location="anunciosTag.jsp?tag='"+ tags + "'";
+});
+</script>
 </body>
 </html>
 

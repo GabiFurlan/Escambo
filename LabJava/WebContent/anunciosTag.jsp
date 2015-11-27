@@ -4,12 +4,7 @@
 <%@ page import="BancoDados.Banco_teste"%>
 <%@ page import="controlador.*"%>
 <%@ page import="java.util.ArrayList" %>
-<%
-	if (session.getAttribute("user") != null) {
 
-		response.sendRedirect("logado.jsp");
-	}
-%>
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,38 +53,72 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.jsp">Início <span
-							class="sr-only">(current)</span></a></li>
+					<li><a href="index.jsp">Início</a></li>
+					
+					<li>
+											<%
+							if (session.getAttribute("user") != null) {
+
+								out.println("<a href= 'profile.jsp' >Perfil</a>");
+
+							}
+						%>
+					</li>
 					<li><a href="sobre.jsp">Sobre</a></li>
 					<li><a href="contato.jsp">Contato</a></li>
 
 
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
+			<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
-						<input type="text" class="form-control"
-							placeholder="Ex: Celular, Tablet ...">
+						<input type="text" class="form-control" 
+							placeholder="Ex: Celular, Tablet ..." id="procurarAnun">
 					</div>
-					<button type="submit" class="btn btn-default">Procurar</button>
+				<button type="button" class="btn btn-primary" id="procurar" >Procurar</button>
 				</form>
+				<%
+					if (session.getAttribute("user") != null) {
+						Usuario abc = (Usuario) session.getAttribute("user");
 
-				<form class="navbar-form navbar-right" action="checkemail"
-					method="post">
-					<div class="form-group">
-						<label class="sr-only" for="exampleInputEmail3">Email</label> <input
-							type="text" class="form-control" name="indexemail"
-							placeholder="Email - Usuário">
-					</div>
-					<div class="form-group">
-						<label class="sr-only" for="exampleInputPassword3">Password</label>
-						<input type="password" class="form-control" name="indexsenha"
-							placeholder="Password">
-					</div>
-					<button type="submit" class="btn btn-default">Entrar</button>
-					<label> <a href="cadastro.jsp">Cadastrar</a></label>
+						out.println("<form class='navbar-form navbar-right' action='logout' method='post'>");
+						out.println("<label><a href='profile.jsp'>" + abc.getLogin() + "</a></label>");
+						out.println("<button type='submit' class='btn btn-default'>Logout</button>");
+					} else {
+						
+						out.println("<form class='navbar-form navbar-right' action='checkemail' method='post' >");
+						out.println("<div class='form-group'>");
+						
+						out.println(
+								"<label class='sr-only' for='exampleInputEmail3'>Email</label> <input type='text' class='form-control' name='indexemail'id='exampleInputEmail3'placeholder='Email - Usuário'>");
+						out.println("</div>");
+						out.println("<div class='form-group'>");
+						out.println("<label class='sr-only' for='exampleInputPassword3'>Password</label>");
+						out.println(
+								"<input type='password' class='form-control'id='exampleInputPassword3' name='indexsenha'placeholder='Senha'>");
+						out.println("</div>");
+						out.println("<button type='submit' class='btn btn-default'>Entrar</button>");
 
-				</form>
+						out.println("<label> <a href='cadastro.jsp'>Cadastrar</a></label>");
+						out.println("</form>");
 
+					}
+				%>
+				
+				
+				<%if (session.getAttribute("user") != null) { %>
+				<form class="navbar-form navbar-right" action="logout" method="post">
+					<label> <a href="profile.jsp">
+							<%
+								Usuario abc = (Usuario) session.getAttribute("user");
+								out.println(abc.getLogin()); %>
+					</a>
+					</label>
+					<button type="submit" class="btn btn-default">Logout</button>
+
+				</form> <% 
+
+	}%>
+				
 
 			</div>
 			<!-- /.navbar-collapse -->
@@ -100,8 +129,7 @@
 	<!FIM DA BARRA DE MENU>
 
 <% 	
-	String tags=request.getParameter("tag");  
-	out.println(tags);
+	String tags=request.getParameter("tag");
 	Anuncio esteAnuncio = new Anuncio();
 	Banco_teste meuBD = new Banco_teste();
 	ArrayList<Anuncio> listaDeAnuncios = esteAnuncio.listaAnuncios(tags);
@@ -112,7 +140,6 @@
 	<div class="container well">
 	<% 
 		for(int i=0;i<n;i++){
-			out.print(esteAnuncio.getImage());
 			out.println("<div class='col-sm-6 col-md-3'>");
 			out.println("<div class='thumbnail'>");
 			esteAnuncio = listaDeAnuncios.get(i);
@@ -194,6 +221,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+		<script>
+$( "#procurar" ).click(function() {
+	
+	var tags = $( "#procurarAnun" ).val();
+	
+	window.location="anunciosTag.jsp?tag='"+ tags + "'";
+});
+</script>
 </body>
 </html>
 
