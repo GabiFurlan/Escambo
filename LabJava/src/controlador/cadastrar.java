@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,8 +69,8 @@ public class cadastrar extends HttpServlet {
 		if (usuarioEditar != null) {
 			if(!usuarioNovo.searchEmailUsuarioCadastrado(usuarioNovo)){
 				System.out.println("Email já existe no cadastro");
-				request.getRequestDispatcher("editarperfil.jsp").forward(
-						request, response);
+				RequestDispatcher rs = request.getRequestDispatcher("editarperfil.jsp");
+	            rs.include(request, response);
 			}else{
 				usuarioEditar.setNomeCom(request.getParameter("novoNome"));
 				usuarioEditar.setEmail(request.getParameter("novoEmail"));
@@ -77,10 +79,12 @@ public class cadastrar extends HttpServlet {
 				usuarioEditar.setNascimentoUsuario(request.getParameter("novoNascimento"));
 				if (usuarioNovo.update(usuarioEditar)){
 					System.out.println("Cadastro atualizado com sucesso!");
-					//response.sendRedirect("profile.jsp");
+					RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");
+		            rs.include(request, response);
 				}else{
 					System.out.println("Erro ao atualizar o cadastro!");
-					//response.sendRedirect("editarperfil.jsp");
+					RequestDispatcher rs = request.getRequestDispatcher("editarperfil.jsp");
+		            rs.include(request, response);
 				}
 			}
 		}

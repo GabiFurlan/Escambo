@@ -48,27 +48,8 @@
 					<input type="text" id="nomeusu" class="form-control"
 						name="usunomeusu" placeholder="Nome de Usuário">
 
-					<script>		
-function tamanho()
-{
-				Usuario usuario = new Usuario();
-				var dota = document.getElementById("nomeusu").value;
-				if(dota.length<5)
-				{
-					alert("Tamanho insuficiente");
-				}
-				else if(!usuario.searchEmail(document.getElementByName("usuemail").value))
-				{
-					
-					alert("Email já cadastrado. Digite outro email")
-				}
-				else
-				{
-					var x = document.getElementById("mybtn").type = "submit";
-					alert("Cadastrado");				
-				}
-}
-</script>
+
+
 				</div>
 			</div>
 
@@ -77,7 +58,7 @@ function tamanho()
 				<label class="col-sm-1"> Nome Completo:</label>
 				<div class="col-sm-2">
 					<input type="text" class="form-control" name=usunomecomp
-						" placeholder="Nome Completo">
+						" placeholder="Nome Completo" id="nomeUsuario">
 				</div>
 			</div>
 
@@ -111,8 +92,8 @@ function tamanho()
 				</div>
 			</div>
 			<div>
-				<button type="button" class="btn btn-success" id="mybtn"
-					onClick="tamanho()">Cadastrar</button>
+				<button type="submit" class="btn btn-success" id="mybtn"
+					>Cadastrar</button>
 				<button type="reset" class="btn btn-warning">Limpar</button>
 				<button type="button" class="btn btn-danger"
 					onClick="history.go(-1);return true">Voltar</button>
@@ -130,6 +111,20 @@ function tamanho()
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
+		<!-- <script>
+$( "#mybtn" ).click(function() {
+	var nomeUsuario = $( "#nomeUsuario" ).val();
+	
+	if(nomeUsuario.length<5)
+	{
+		alert("Tamanho insuficiente");
+	}
+	else{
+		$("input[id='mybtn']").prop("type", "submit");
+		alert("Cadastrado");				
+	}
+});
+</script> -->
 </body>
 </html>
 

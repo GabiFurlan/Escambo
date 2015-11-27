@@ -99,8 +99,8 @@
 
 				<form class="navbar-form navbar-right" action="logout" method="post">
 					<label> <a href="profile.jsp"> <%
- 	Usuario abc = (Usuario) session.getAttribute("user");
- 	out.println(abc.getLogin());
+ 					Usuario abc = (Usuario) session.getAttribute("user");
+ 					out.println(abc.getLogin());
  %>
 					</a>
 					</label>
@@ -154,7 +154,7 @@
 									class="fa fa-user bigicon"></i></span>
 								<div class="col-md-8">
 									<label>Data de nascimento:</label> <input required id="fname"
-										name="novoNascimento" type="date" placeholder="dd/mm/aaaa"
+										name="novoNascimento" type="text" placeholder="dd/mm/aaaa"
 										value="<%out.println(abc.getNascimentoUsuario()); %>"
 										class="form-control">
 

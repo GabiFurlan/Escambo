@@ -108,6 +108,8 @@ public class CadAnun extends HttpServlet {
 			Anuncio meuAnuncio = new Anuncio(); 
 			try {
 				meuAnuncio.apagarAnuncio(Integer.parseInt(request.getParameter("anun_Id")));
+				RequestDispatcher rs = request.getRequestDispatcher("veranuncios.jsp");
+	            rs.include(request, response);
 			} catch (NumberFormatException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

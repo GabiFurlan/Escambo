@@ -138,7 +138,6 @@
 	<div class="container well">
 	<% 
 		for(int i=0;i<n;i++){
-			out.print(esteAnuncio.getImage());
 			out.println("<div class='col-sm-6 col-md-3'>");
 			out.println("<div class='thumbnail'>");
 			esteAnuncio = listaDeAnuncios.get(i);

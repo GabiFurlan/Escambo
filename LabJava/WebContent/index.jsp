@@ -75,7 +75,7 @@
 					method="post">
 					<div class="form-group">
 						<label class="sr-only" for="exampleInputEmail3">Email</label> <input
-							type="text" class="form-control" name="indexemail"
+							type="text" class="form-control" name="indexemail" id="emailUsuario"
 							placeholder="Email - Usuário">
 					</div>
 					<div class="form-group">
