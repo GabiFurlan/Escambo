@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import BancoDados.Banco_teste;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 public class Anuncio {
 	

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.servlet.http.Part;
 import javax.swing.ImageIcon;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 import controlador.Anuncio;
 import controlador.Usuario;
@@ -20,9 +20,9 @@ import controlador.Usuario;
 public class Banco_teste {
 
 	String driver = "com.mysql.jdbc.Driver";
-	String myUrl = "Jdbc:mysql://localhost:3307/Escambo";
+	String myUrl = "Jdbc:mysql://localhost:3306/Escambo";
 	String usuario = "root";
-	String senha = "";
+	String senha = "vinicius";
 	public static Connection con;
 	
 	public void conexao() {

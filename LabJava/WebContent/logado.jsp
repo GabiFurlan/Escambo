@@ -8,16 +8,14 @@
 <head>
 
 
-<%
-	if (session.getAttribute("user") != null) {
 
-	}
-	else
-	{
+<%
+	if (session.getAttribute("user") == null) {
+
 		response.sendRedirect("index.jsp");
-		
 	}
 %>
+
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,6 +90,27 @@
 	</nav>
 	<!FIM DA BARRA DE MENU>
 	
+	
+
+<section>
+		<div class="jumbotron text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs12">
+						<h1>Escambo</h1>
+						<p>Anuncie aqui seus produtos usados.</p>
+						<!-- 			<p>
+							<a class="btn btn-primary btn-lg" href="sobre.jsp" role="button">Saiba
+								Mais »</a>
+						</p> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
 	<% 	
 	Anuncio esteAnuncio = new Anuncio();
 	Banco_teste meuBD = new Banco_teste();
@@ -116,6 +135,63 @@
 			out.println("</div>");
 			}%>	
 </div>
+
+
+	<script type="text/javascript">
+		var limeira = 25;
+	</script>
+
+	<div class="container well">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4">
+				<span class="text-right"> </span>
+				<h3>Sobre Nós</h3>
+				<hr>
+				<p>A Escambo-FT LTDA é um site que faz a intermediação entre
+					pessoas que procuram vender ou trocar seus bens.</p>
+				<p>A ideia é que após visto o anúncio no site, os interessados
+					entrem em contato com o anúnciante.</p>
+				<p>Obs: Nós não nos responsabilizamos por qualquer negociação
+					feita apartir daqui.</p>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4 hidden-sm hidden-xs">
+				<span class="text-right"> </span>
+				<h3>Últimas Notícias</h3>
+				<hr>
+				<div class="media-object-default">
+					<div class="media">
+						<div class="media-body">
+							<h4 class="media-heading">Site Atualizado</h4>
+							Removemos alguns defeitos com a barra superior,
+							<p>Também foi introduzido novos links.</p>
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-body">
+							<h4 class="media-heading">Site Fora do Ar</h4>
+							Estivesmo fora do ar por alguns momentos essa semana devido a
+							falhas com o servidor local.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-lg-4 col-md-4">
+				<span class="text-right"> </span>
+				<h3>Fale Conosco</h3>
+				<hr>
+
+				<address>
+					<strong>Escambo LTDA</strong><br> Pascoal Marmo 1888,<br>
+					Limeira, SP, CEP: 13484-332 <br> <abbr title="Phone">Tel:</abbr>
+					(19) 9456-7890
+				</address>
+
+				<address>
+					<strong>Henrique Bicudo</strong><br> <a href="mailto:#">escambo@example.com</a>
+				</address>
+			</div>
+		</div>
+	</div>
 
 <!-- 
 

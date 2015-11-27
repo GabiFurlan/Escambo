@@ -9,6 +9,10 @@
 	}
 %>
 
+<%@ page import="BancoDados.Banco_teste"%>
+<%@ page import="controlador.*"%>
+<%@ page import="java.util.ArrayList" %>
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -116,6 +120,32 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	<% 	
+	Anuncio esteAnuncio = new Anuncio();
+	Banco_teste meuBD = new Banco_teste();
+	ArrayList<Anuncio> listaDeAnuncios = esteAnuncio.listaAnuncios();
+	String url = null;
+	int n = listaDeAnuncios.size();
+	
+		%>
+	<div class="container well">
+	<% 
+		for(int i=0;i<n;i++){
+			out.println("<div class='col-sm-6 col-md-3'>");
+			out.println("<div class='thumbnail'>");
+			esteAnuncio = listaDeAnuncios.get(i);
+			int anun_Id  = esteAnuncio.getIdAnuncio();
+			%><img src="CadAnun?anun_Id=<%=anun_Id%>&ac=mostrarFoto" width="200" height="190"/> <%
+			out.println("</div>");
+			out.println("<div class='caption'>");
+			out.println("<h3>" + listaDeAnuncios.get(i).getTituloAnuncio() + "</h3>");
+			out.println("<p>" + listaDeAnuncios.get(i).getDescricaoAnuncio()+ "</p>");
+			out.println("</div>");
+			out.println("</div>");
+			}%>	
+</div>
 
 	<script type="text/javascript">
 		var limeira = 25;

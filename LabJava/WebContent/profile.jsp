@@ -8,7 +8,7 @@
 	}
 	else
 	{
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/index.jsp");
 		
 	}
 %>
@@ -67,12 +67,15 @@
 				<button type="button" class="btn btn-primary" id="procurar" >Procurar</button>
 				</form>
 
-
+		<%if(session.getAttribute("user")==null){}
+		else{
+			%>
+		
 				<form class="navbar-form navbar-right" action="logout" method="post">
 					<label> <a href="profile.jsp"> <%
  	Usuario abc = (Usuario) session.getAttribute("user");
  	out.println(abc.getLogin());
- %>
+		} %>
 					</a>
 					</label>
 					<button type="submit" class="btn btn-default">Logout</button>
